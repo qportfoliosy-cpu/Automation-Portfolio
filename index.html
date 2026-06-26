@@ -27,6 +27,7 @@
     input { 
       padding: 10px; 
       width: 60%; 
+      margin: 5px;
       border: 1px solid #ccc; 
       border-radius: 4px; 
       font-size: 16px;
@@ -54,19 +55,54 @@
       qportfoliosy@gmail.com
     </a>
 
+    <!-- فورم العملاء - ده اللي هيبعت للشيت -->
+    <form id="leadForm">
+      <p><strong>احجز استشارة مجانية:</strong></p>
+      <input type="text" id="nameInput" name="name" placeholder="الاسم" required>
+      <input type="tel" id="whatsappInput" name="whatsapp" placeholder="رقم الواتس" required>
+      <button type="submit">ارسال</button>
+      <div id="result"></div>
+    </form>
+
+    <hr style="margin:30px 0;">
+    <!-- تجربة المصنع زي ما هي -->
     <form id="builder">
       <p><strong>تجربة المصنع:</strong> اكتب اسمك لعرض نموذج الصفحة</p>
-      <input type="text" id="nameInput" placeholder="الاسم" required>
+      <input type="text" id="nameInput2" placeholder="الاسم" required>
       <button type="submit">عرض</button>
-      <div id="result"></div>
+      <div id="result2"></div>
     </form>
   </div>
 
   <script>
+    // 1. كود ارسال البيانات للشيت
+    document.getElementById('leadForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const data = {
+        name: document.getElementById('nameInput').value,
+        whatsapp: document.getElementById('whatsappInput').value
+      };
+
+      fetch('https://script.google.com/macros/s/AKfycbxYJWBm3CzKj_7D8MeDT21cHPF3jxUqjYmb8tLTqFTm6WaYCChLpxMJVQg18c7bRhxwDA/exec', {
+        method: 'POST',
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('result').innerHTML = '✅ تم استلام بياناتك، هتواصل معاك واتس';
+        document.getElementById('leadForm').reset();
+      })
+      .catch(error => {
+        document.getElementById('result').innerHTML = '❌ حصل خطأ، جرب تاني';
+      });
+    });
+
+    // 2. تجربة المصنع زي ما هي ماتغيرتش
     document.getElementById('builder').addEventListener('submit', function(e) {
       e.preventDefault();
-      const name = document.getElementById('nameInput').value;
-      document.getElementById('result').innerHTML = 
+      const name = document.getElementById('nameInput2').value;
+      document.getElementById('result2').innerHTML = 
         `مرحباً، أنا ${name}. هذا نموذج صفحة جاهز.`;
     });
   </script>
