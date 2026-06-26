@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>معاذ | Moaz Automation</title>
+  <title>معاذ | Moaz Automation - أنظمة AI وأتمتة</title>
   <style>
     :root {
       --brand: #1a73e8;
@@ -13,8 +13,9 @@
       --text: #1f2937;
       --muted: #6b7280;
       --border: #e5e7eb;
+      --green: #10b981;
     }
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; scroll-behavior: smooth; }
     body { 
       background: var(--bg); 
       color: var(--text); 
@@ -32,9 +33,27 @@
       box-shadow: 0 8px 24px rgba(0,0,0,0.06);
       text-align: center;
     }
-    h1 { font-size: 26px; margin: 0 0 8px; color: #111; }
-    .sub { color: var(--muted); line-height: 1.8; margin-bottom: 20px; }
+    h1 { font-size: 28px; margin: 0 0 8px; color: #111; }
+    .sub { color: var(--muted); line-height: 1.8; margin-bottom: 20px; font-size: 16px; }
     
+    /* نقاط الثقة الجديدة */
+    .trust-badges {
+      display: flex; 
+      gap: 12px; 
+      justify-content: center; 
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+    .badge {
+      background: #eff6ff; 
+      color: var(--brand-dark);
+      padding: 6px 12px; 
+      border-radius: 20px; 
+      font-size: 13px; 
+      font-weight: 600;
+      border: 1px solid #dbeafe;
+    }
+
     .btn-email {
       display: inline-flex;
       align-items: center;
@@ -46,31 +65,48 @@
       border-radius: 10px;
       font-weight: 600;
       transition: .2s;
+      margin-bottom: 12px;
     }
     .btn-email:hover { background: var(--brand-dark); transform: translateY(-1px); }
+
+    /* زرار النزول للفورم */
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green);
+      color: #fff !important;
+      text-decoration: none;
+      padding: 14px 24px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 16px;
+      transition: .2s;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+    .btn-cta:hover { background: #059669; transform: translateY(-2px); }
 
     .form-wrap {
       margin-top: 28px; 
       border-top: 1px solid var(--border); 
       padding-top: 24px;
       text-align: right;
+      scroll-margin-top: 20px;
     }
-    .form-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; text-align: center; }
+    .form-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; text-align: center; }
+    .form-note { color: var(--muted); font-size: 14px; text-align: center; margin-bottom: 16px; }
     
     .form-frame {
       width: 100%;
       border: 0;
       border-radius: 12px;
       overflow: hidden;
-      min-height: 1200px; /* طول افتراضي للديسكتوب */
-    }
-    @media (max-width: 600px) {
-      .form-frame { min-height: 1400px; } /* طول اكبر للموبايل عشان جوجل */
+      min-height: 800px; /* قللناه عشان مفيش فراغ */
+      transition: height 0.3s ease;
     }
 
     hr { border: 0; border-top: 1px solid var(--border); margin: 28px 0; }
 
-    /* تجربة المصنع في كارت منفصل */
     .demo-card {
       background: #f9fafb;
       border: 1px dashed var(--border);
@@ -94,16 +130,27 @@
 
   <div class="container">
     <h1>معاذ | Moaz Automation</h1>
-    <p class="sub">أقدم خدمات برمجة الأتمتة والذكاء الاصطناعي. 
-    متخصص في بناء صفحات HTML سريعة ومتوافقة مع الهواتف للشركات والمتاجر.</p>
+    <p class="sub">أوفرلك وقت وفلوس بأنظمة ذكاء اصطناعي وأتمتة تشتغل 24 ساعة مكان فريق كامل.</p>
     
+    <!-- نقاط الثقة الجديدة -->
+    <div class="trust-badges">
+      <span class="badge">⚡ رد خلال 24 ساعة</span>
+      <span class="badge">🎯 استشارة مجانية</span>
+      <span class="badge">📱 متوافق مع الموبايل</span>
+    </div>
+
     <a class="btn-email" href="mailto:qportfoliosy@gmail.com">
       📧 qportfoliosy@gmail.com
     </a>
+    <br>
+    <a class="btn-cta" href="#form">
+      احجز استشارتك المجانية الآن ↓
+    </a>
 
-    <!-- فورم العملاء المحسن -->
-    <div class="form-wrap">
-      <p class="form-title">احجز استشارة مجانية</p>
+    <!-- الفورم -->
+    <div id="form" class="form-wrap">
+      <p class="form-title">ابدأ مشروعك بالـ AI</p>
+      <p class="form-note">3 دقايق بس وهتواصل معاك بنفسي</p>
       <iframe 
         id="gform"
         class="form-frame"
@@ -117,7 +164,6 @@
     </div>
 
     <hr>
-    <!-- تجربة المصنع -->
     <div class="demo-card">
       <form id="builder">
         <p><strong>تجربة المصنع:</strong> اكتب اسمك لعرض نموذج الصفحة</p>
@@ -129,20 +175,22 @@
   </div>
 
   <script>
-    // سكريبت Auto Height الذكي
+    // سكريبت Auto Height الذكي + ResizeObserver عشان جوجل
     const iframe = document.getElementById('gform');
+    function resizeIframe() {
+      iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+    }
     iframe.onload = function() {
       try {
-        // بنحاول نقرا الارتفاع من جوه الفورم
-        const height = iframe.contentWindow.document.body.scrollHeight;
-        iframe.style.height = height + 'px';
+        resizeIframe();
+        // بيراقب لو الفورم طول بعد ما العميل يدوس "التالي"
+        const ro = new ResizeObserver(resizeIframe);
+        ro.observe(iframe.contentWindow.document.body);
       } catch (e) {
-        // لو جوجل منعتنا Cross-Origin، بنسيبه بالـ min-height اللي فوق
         console.log("Auto-height blocked. Using CSS fallback.");
       }
     };
 
-    // تجربة المصنع
     document.getElementById('builder').addEventListener('submit', function(e) {
       e.preventDefault();
       const name = document.getElementById('nameInput2').value;
