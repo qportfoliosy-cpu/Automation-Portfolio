@@ -3,40 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>معاذ | خدمات أتمتة</title>
+  <title>معاذ | Moaz Automation</title>
   <style>
+    :root {
+      --brand: #1a73e8;
+      --brand-dark: #1557b0;
+      --bg: #f5f7fa;
+      --card: #fff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+    }
+    * { box-sizing: border-box; }
     body { 
-      background: #f5f5f5; 
-      color: #222; 
+      background: var(--bg); 
+      color: var(--text); 
       font-family: 'Segoe UI', Tahoma, sans-serif; 
       margin: 0; 
-      padding: 40px 20px; 
+      padding: 32px 16px; 
       text-align: center;
     }
     .container { 
-      max-width: 600px; 
+      max-width: 680px; 
       margin: auto; 
-      background: #fff; 
-      padding: 30px; 
-      border: 1px solid #ddd; 
-      border-radius: 8px; 
+      background: var(--card); 
+      padding: 32px 24px; 
+      border: 1px solid var(--border); 
+      border-radius: 16px; 
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
     }
-    h1 { font-size: 24px; margin-bottom: 10px; color: #111; }
-    p { line-height: 1.8; color: #444; }
-    a { color:#1a73e8; text-decoration:none; }
+    h1 { font-size: 26px; margin: 0 0 8px; color: #111; }
+    .sub { color: var(--muted); line-height: 1.8; margin-bottom: 20px; }
     
-    /* كود الفورم مظبوط 100% للموبايل */
-    .form-container {
-      margin-top: 30px; 
-      border-top: 1px solid #eee; 
-      padding-top: 20px;
+    /* زر الايميل الجديد */
+    .btn-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--brand);
+      color: #fff !important;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: .2s;
     }
-    .form-container iframe {
+    .btn-email:hover { background: var(--brand-dark); transform: translateY(-1px); }
+
+    /* كارت الفورم */
+    .form-wrap {
+      margin-top: 28px; 
+      border-top: 1px solid var(--border); 
+      padding-top: 24px;
+      text-align: right;
+    }
+    .form-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; text-align: center; }
+    
+    /* هنا السحر: الفورم بدون ارتفاع ثابت */
+    .form-frame {
       width: 100%;
-      max-width: 100%;
-      border: none;
-      height: 700px; /* خليته في ال CSS عشان يبقى اسهل في التحكم */
+      border: 0;
+      border-radius: 12px;
+      overflow: hidden;
     }
+
+    hr { border: 0; border-top: 1px solid var(--border); margin: 28px 0; }
+
+    /* تجربة المصنع */
+    #builder input {
+      padding: 12px; width: 60%; margin: 5px; 
+      border: 1px solid var(--border); border-radius: 8px; font-size: 16px;
+    }
+    #builder button {
+      padding: 12px 20px; background: var(--brand); color: #fff; 
+      border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: 600;
+    }
+    #builder button:hover { background: var(--brand-dark); }
+    #result2 { margin-top: 10px; color: var(--muted); }
 
   </style>
 </head>
@@ -44,15 +87,19 @@
 
   <div class="container">
     <h1>معاذ | Moaz Automation</h1>
-    <p>أقدم خدمات برمجة الأتمتة والذكاء الاصطناعي. 
+    <p class="sub">أقدم خدمات برمجة الأتمتة والذكاء الاصطناعي. 
     متخصص في بناء صفحات HTML سريعة ومتوافقة مع الهواتف للشركات والمتاجر.</p>
     
-    <a href="mailto:qportfoliosy@gmail.com">qportfoliosy@gmail.com</a>
+    <a class="btn-email" href="mailto:qportfoliosy@gmail.com">
+      📧 qportfoliosy@gmail.com
+    </a>
 
-    <!-- فورم العملاء الجديد - جوجل فورم -->
-    <div class="form-container">
-      <p><strong>احجز استشارة مجانية:</strong></p>
+    <!-- فورم العملاء الجديد - جوجل فورم بدون سكرول -->
+    <div class="form-wrap">
+      <p class="form-title">احجز استشارة مجانية</p>
       <iframe 
+        id="gform"
+        class="form-frame"
         src="https://docs.google.com/forms/d/e/1FAIpQLSd-_qqad2pmeVJByhW6FrfR919C5aygtrhBBD86_G2nl_7T2A/viewform?embedded=true" 
         frameborder="0" 
         marginheight="0" 
@@ -61,17 +108,32 @@
       </iframe>
     </div>
 
-    <hr style="margin:30px 0;">
+    <hr>
     <!-- تجربة المصنع زي ما هي -->
     <form id="builder">
       <p><strong>تجربة المصنع:</strong> اكتب اسمك لعرض نموذج الصفحة</p>
-      <input type="text" id="nameInput2" placeholder="الاسم" required style="padding: 10px; width: 60%; margin: 5px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;">
-      <button type="submit" style="padding: 10px 20px; background: #1a73e8; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">عرض</button>
+      <input type="text" id="nameInput2" placeholder="الاسم" required>
+      <button type="submit">عرض</button>
       <div id="result2"></div>
     </form>
   </div>
 
   <script>
+    // 1. سكريبت Auto Height للفورم: بيشيل السكرول الداخلي
+    const iframe = document.getElementById('gform');
+    iframe.onload = function() {
+      try {
+        // بنحاول نجيب ارتفاع المحتوى جوه الفورم
+        const body = iframe.contentWindow.document.body;
+        const html = iframe.contentWindow.documentElement;
+        const height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+        iframe.style.height = height + 'px';
+      } catch (e) {
+        // لو جوجل منعت الوصول Cross-Origin، بنخليه 1100px كحل احتياطي
+        iframe.style.height = '1100px'; 
+      }
+    };
+
     // 2. تجربة المصنع زي ما هي ماتغيرتش
     document.getElementById('builder').addEventListener('submit', function(e) {
       e.preventDefault();
