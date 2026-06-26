@@ -21,7 +21,6 @@
       font-family: 'Segoe UI', Tahoma, sans-serif; 
       margin: 0; 
       padding: 32px 16px; 
-      text-align: center;
     }
     .container { 
       max-width: 680px; 
@@ -31,11 +30,11 @@
       border: 1px solid var(--border); 
       border-radius: 16px; 
       box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      text-align: center;
     }
     h1 { font-size: 26px; margin: 0 0 8px; color: #111; }
     .sub { color: var(--muted); line-height: 1.8; margin-bottom: 20px; }
     
-    /* زر الايميل الجديد */
     .btn-email {
       display: inline-flex;
       align-items: center;
@@ -50,7 +49,6 @@
     }
     .btn-email:hover { background: var(--brand-dark); transform: translateY(-1px); }
 
-    /* كارت الفورم */
     .form-wrap {
       margin-top: 28px; 
       border-top: 1px solid var(--border); 
@@ -59,17 +57,26 @@
     }
     .form-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; text-align: center; }
     
-    /* هنا السحر: الفورم بدون ارتفاع ثابت */
     .form-frame {
       width: 100%;
       border: 0;
       border-radius: 12px;
       overflow: hidden;
+      min-height: 1200px; /* طول افتراضي للديسكتوب */
+    }
+    @media (max-width: 600px) {
+      .form-frame { min-height: 1400px; } /* طول اكبر للموبايل عشان جوجل */
     }
 
     hr { border: 0; border-top: 1px solid var(--border); margin: 28px 0; }
 
-    /* تجربة المصنع */
+    /* تجربة المصنع في كارت منفصل */
+    .demo-card {
+      background: #f9fafb;
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
     #builder input {
       padding: 12px; width: 60%; margin: 5px; 
       border: 1px solid var(--border); border-radius: 8px; font-size: 16px;
@@ -79,7 +86,7 @@
       border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: 600;
     }
     #builder button:hover { background: var(--brand-dark); }
-    #result2 { margin-top: 10px; color: var(--muted); }
+    #result2 { margin-top: 10px; color: var(--muted); font-weight: 500; }
 
   </style>
 </head>
@@ -94,7 +101,7 @@
       📧 qportfoliosy@gmail.com
     </a>
 
-    <!-- فورم العملاء الجديد - جوجل فورم بدون سكرول -->
+    <!-- فورم العملاء المحسن -->
     <div class="form-wrap">
       <p class="form-title">احجز استشارة مجانية</p>
       <iframe 
@@ -103,38 +110,39 @@
         src="https://docs.google.com/forms/d/e/1FAIpQLSd-_qqad2pmeVJByhW6FrfR919C5aygtrhBBD86_G2nl_7T2A/viewform?embedded=true" 
         frameborder="0" 
         marginheight="0" 
-        marginwidth="0">
+        marginwidth="0"
+        loading="lazy">
         جاري التحميل...
       </iframe>
     </div>
 
     <hr>
-    <!-- تجربة المصنع زي ما هي -->
-    <form id="builder">
-      <p><strong>تجربة المصنع:</strong> اكتب اسمك لعرض نموذج الصفحة</p>
-      <input type="text" id="nameInput2" placeholder="الاسم" required>
-      <button type="submit">عرض</button>
-      <div id="result2"></div>
-    </form>
+    <!-- تجربة المصنع -->
+    <div class="demo-card">
+      <form id="builder">
+        <p><strong>تجربة المصنع:</strong> اكتب اسمك لعرض نموذج الصفحة</p>
+        <input type="text" id="nameInput2" placeholder="الاسم" required>
+        <button type="submit">عرض</button>
+        <div id="result2"></div>
+      </form>
+    </div>
   </div>
 
   <script>
-    // 1. سكريبت Auto Height للفورم: بيشيل السكرول الداخلي
+    // سكريبت Auto Height الذكي
     const iframe = document.getElementById('gform');
     iframe.onload = function() {
       try {
-        // بنحاول نجيب ارتفاع المحتوى جوه الفورم
-        const body = iframe.contentWindow.document.body;
-        const html = iframe.contentWindow.documentElement;
-        const height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+        // بنحاول نقرا الارتفاع من جوه الفورم
+        const height = iframe.contentWindow.document.body.scrollHeight;
         iframe.style.height = height + 'px';
       } catch (e) {
-        // لو جوجل منعت الوصول Cross-Origin، بنخليه 1100px كحل احتياطي
-        iframe.style.height = '1100px'; 
+        // لو جوجل منعتنا Cross-Origin، بنسيبه بالـ min-height اللي فوق
+        console.log("Auto-height blocked. Using CSS fallback.");
       }
     };
 
-    // 2. تجربة المصنع زي ما هي ماتغيرتش
+    // تجربة المصنع
     document.getElementById('builder').addEventListener('submit', function(e) {
       e.preventDefault();
       const name = document.getElementById('nameInput2').value;
