@@ -23,25 +23,20 @@
     }
     h1 { font-size: 24px; margin-bottom: 10px; color: #111; }
     p { line-height: 1.8; color: #444; }
-    form { margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; }
-    input { 
-      padding: 10px; 
-      width: 60%; 
-      margin: 5px;
-      border: 1px solid #ccc; 
-      border-radius: 4px; 
-      font-size: 16px;
+    a { color:#1a73e8; text-decoration:none; }
+    
+    /* كود جديد عشان الفورم يبقى مظبوط */
+    .form-container {
+      margin-top: 30px; 
+      border-top: 1px solid #eee; 
+      padding-top: 20px;
     }
-    button { 
-      padding: 10px 20px; 
-      background: #1a73e8; 
-      color: #fff; 
-      border: none; 
-      border-radius: 4px; 
-      cursor: pointer; 
-      font-size: 16px;
+    .form-container iframe {
+      width: 100%;
+      max-width: 100%;
+      border: none;
     }
-    #result { margin-top: 20px; font-weight: bold; color: #1a73e8; }
+
   </style>
 </head>
 <body>
@@ -51,53 +46,31 @@
     <p>أقدم خدمات برمجة الأتمتة والذكاء الاصطناعي. 
     متخصص في بناء صفحات HTML سريعة ومتوافقة مع الهواتف للشركات والمتاجر.</p>
     
-    <a href="mailto:qportfoliosy@gmail.com" style="color:#1a73e8; text-decoration:none;">
-      qportfoliosy@gmail.com
-    </a>
+    <a href="mailto:qportfoliosy@gmail.com">qportfoliosy@gmail.com</a>
 
-    <!-- فورم العملاء - ده اللي هيبعت للشيت -->
-    <form id="leadForm">
+    <!-- فورم العملاء الجديد - جوجل فورم -->
+    <div class="form-container">
       <p><strong>احجز استشارة مجانية:</strong></p>
-      <input type="text" id="nameInput" name="name" placeholder="الاسم" required>
-      <input type="tel" id="whatsappInput" name="whatsapp" placeholder="رقم الواتس" required>
-      <button type="submit">ارسال</button>
-      <div id="result"></div>
-    </form>
+      <iframe src="https://docs.google.com/forms/d/e/U5JPANY5LdMVggyr5/viewform?embedded=true" 
+      height="600" 
+      frameborder="0" 
+      marginheight="0" 
+      marginwidth="0">
+      جاري التحميل...
+      </iframe>
+    </div>
 
     <hr style="margin:30px 0;">
     <!-- تجربة المصنع زي ما هي -->
     <form id="builder">
       <p><strong>تجربة المصنع:</strong> اكتب اسمك لعرض نموذج الصفحة</p>
-      <input type="text" id="nameInput2" placeholder="الاسم" required>
-      <button type="submit">عرض</button>
+      <input type="text" id="nameInput2" placeholder="الاسم" required style="padding: 10px; width: 60%; margin: 5px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;">
+      <button type="submit" style="padding: 10px 20px; background: #1a73e8; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">عرض</button>
       <div id="result2"></div>
     </form>
   </div>
 
   <script>
-    // 1. كود ارسال البيانات للشيت
-    document.getElementById('leadForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const data = {
-        name: document.getElementById('nameInput').value,
-        whatsapp: document.getElementById('whatsappInput').value
-      };
-
-      fetch('https://script.google.com/macros/s/AKfycbxYJWBm3CzKj_7D8MeDT21cHPF3jxUqjYmb8tLTqFTm6WaYCChLpxMJVQg18c7bRhxwDA/exec', {
-        method: 'POST',
-        body: JSON.stringify(data)
-      })
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById('result').innerHTML = '✅ تم استلام بياناتك، هتواصل معاك واتس';
-        document.getElementById('leadForm').reset();
-      })
-      .catch(error => {
-        document.getElementById('result').innerHTML = '❌ حصل خطأ، جرب تاني';
-      });
-    });
-
     // 2. تجربة المصنع زي ما هي ماتغيرتش
     document.getElementById('builder').addEventListener('submit', function(e) {
       e.preventDefault();
