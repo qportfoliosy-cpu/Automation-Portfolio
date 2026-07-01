@@ -36,7 +36,6 @@
     h1 { font-size: 28px; margin: 0 0 8px; color: #111; }
     .sub { color: var(--muted); line-height: 1.8; margin-bottom: 20px; font-size: 16px; }
     
-    /* نقاط الثقة الجديدة */
     .trust-badges {
       display: flex; 
       gap: 12px; 
@@ -65,45 +64,8 @@
       border-radius: 10px;
       font-weight: 600;
       transition: .2s;
-      margin-bottom: 12px;
     }
     .btn-email:hover { background: var(--brand-dark); transform: translateY(-1px); }
-
-    /* زرار النزول للفورم */
-    .btn-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--green);
-      color: #fff !important;
-      text-decoration: none;
-      padding: 14px 24px;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 16px;
-      transition: .2s;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-    }
-    .btn-cta:hover { background: #059669; transform: translateY(-2px); }
-
-    .form-wrap {
-      margin-top: 28px; 
-      border-top: 1px solid var(--border); 
-      padding-top: 24px;
-      text-align: right;
-      scroll-margin-top: 20px;
-    }
-    .form-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; text-align: center; }
-    .form-note { color: var(--muted); font-size: 14px; text-align: center; margin-bottom: 16px; }
-    
-    .form-frame {
-      width: 100%;
-      border: 0;
-      border-radius: 12px;
-      overflow: hidden;
-      min-height: 800px; /* قللناه عشان مفيش فراغ */
-      transition: height 0.3s ease;
-    }
 
     hr { border: 0; border-top: 1px solid var(--border); margin: 28px 0; }
 
@@ -132,7 +94,6 @@
     <h1>معاذ | Moaz Automation</h1>
     <p class="sub">أوفرلك وقت وفلوس بأنظمة ذكاء اصطناعي وأتمتة تشتغل 24 ساعة مكان فريق كامل.</p>
     
-    <!-- نقاط الثقة الجديدة -->
     <div class="trust-badges">
       <span class="badge">⚡ رد خلال 24 ساعة</span>
       <span class="badge">🎯 استشارة مجانية</span>
@@ -142,26 +103,6 @@
     <a class="btn-email" href="mailto:qportfoliosy@gmail.com">
       📧 qportfoliosy@gmail.com
     </a>
-    <br>
-    <a class="btn-cta" href="#form">
-      احجز استشارتك المجانية الآن ↓
-    </a>
-
-    <!-- الفورم -->
-    <div id="form" class="form-wrap">
-      <p class="form-title">ابدأ مشروعك بالـ AI</p>
-      <p class="form-note">3 دقايق بس وهتواصل معاك بنفسي</p>
-      <iframe 
-        id="gform"
-        class="form-frame"
-        src="https://docs.google.com/forms/d/e/1FAIpQLSd-_qqad2pmeVJByhW6FrfR919C5aygtrhBBD86_G2nl_7T2A/viewform?embedded=true" 
-        frameborder="0" 
-        marginheight="0" 
-        marginwidth="0"
-        loading="lazy">
-        جاري التحميل...
-      </iframe>
-    </div>
 
     <hr>
     <div class="demo-card">
@@ -175,22 +116,6 @@
   </div>
 
   <script>
-    // سكريبت Auto Height الذكي + ResizeObserver عشان جوجل
-    const iframe = document.getElementById('gform');
-    function resizeIframe() {
-      iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
-    }
-    iframe.onload = function() {
-      try {
-        resizeIframe();
-        // بيراقب لو الفورم طول بعد ما العميل يدوس "التالي"
-        const ro = new ResizeObserver(resizeIframe);
-        ro.observe(iframe.contentWindow.document.body);
-      } catch (e) {
-        console.log("Auto-height blocked. Using CSS fallback.");
-      }
-    };
-
     document.getElementById('builder').addEventListener('submit', function(e) {
       e.preventDefault();
       const name = document.getElementById('nameInput2').value;
